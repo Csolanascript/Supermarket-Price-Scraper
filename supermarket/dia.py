@@ -62,7 +62,13 @@ def get_products_by_category_dia(list_categories, ruta):
 
         #Obtener los productos de la categoria
         list_products_data = requests.get(url, headers=HEADERS_REQUEST_DIA)
-        list_products = list_products_data.json()
+        try:
+            list_products = list_products_data.json()
+        except Exception as e:
+            print("[AVISO] Error al decodificar JSON para Dia. Se omite la categoría:", stringCategoria)
+            print("Status code:", list_products_data.status_code)
+            # print("Respuesta:", list_products_data.text)  # Descomenta si necesitas ver la respuesta completa
+            continue
             
         try:
             df_productos = pd.json_normalize(list_products["plp_items"], sep="_")

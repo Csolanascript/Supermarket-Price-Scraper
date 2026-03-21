@@ -1,3 +1,4 @@
+cloudscraper
 bs4==0.0.1
 by==0.0.4
 cfscrape==2.1.1
