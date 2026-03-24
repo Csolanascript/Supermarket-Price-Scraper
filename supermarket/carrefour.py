@@ -118,7 +118,7 @@ def get_products_by_category_carrefour(list_categories, ruta):
                 existeOffset = False
     
     #Export Excel
-    export_excel(df_products, ruta, "products_carrefour_", "Productos_Carrefour")
+    export_excel(df_products, os.path.join(ruta,""), "products_carrefour_", "Productos_Carrefour")
     
     return df_products
 

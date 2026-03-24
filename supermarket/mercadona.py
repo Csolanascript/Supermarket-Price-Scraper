@@ -1,3 +1,5 @@
+# Agregar import os para manejo de rutas
+import os
 from excel_data import *
 from datetime import *
 import requests
@@ -84,7 +86,7 @@ def get_products_by_category_mercadona(list_categories, ruta):
         time.sleep(1)
     
     #Export Excel
-    export_excel(df_products, ruta, "products_mercadona_", "Productos_Mercadona")
+    export_excel(df_products,  os.path.join(ruta,""), "products_mercadona_", "Productos_Mercadona")
     
     return df_products
     

@@ -3,13 +3,24 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-scraper = cloudscraper.create_scraper() # Crea un cliente que salta protecciones
-cookie = os.getenv('COOKIE_CARREFOUR')
+scraper = cloudscraper.create_scraper()
 
-headers = {
-    'User-Agent': 'TU_USER_AGENT_DE_CHROME_REAL',
-    'Cookie': cookie
+# Configuración de Dia
+cookie_dia = os.getenv('COOKIE_DIA')
+url_dia = "https://www.dia.es/api/v1/plp-insight/initial_analytics/charcuteria-yquesos/jamon-cocido-lacon-fiambres-ymortadela/c/L2001?navigation=L2001"
+
+headers_dia = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+    'Cookie': cookie_dia,
+    'Accept': 'application/json',
+    'Accept-Language': 'es-ES,es;q=0.9'
 }
 
-r = scraper.get("https://www.carrefour.es/cloud-api/categories-api/v1/categories/menu/", headers=headers)
-print(f"Resultado con CloudScraper: {r.status_code}")
+response = scraper.get(url_dia, headers=headers_dia)
+
+if response.status_code == 200:
+    data = response.json()
+    print("Conexión exitosa con Dia")
+    # Aquí ya puedes procesar el JSON 'data'
+else:
+    print(f"Error en Dia: {response.status_code}")
